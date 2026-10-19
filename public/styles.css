@@ -1,0 +1,212 @@
+:root {
+  --background: #f8f7f4;
+  --text: #20201e;
+  --muted: #686862;
+  --hint: #74746d;
+  --surface: #fff;
+  --border: #d8d7d1;
+  --accent: #3c6553;
+  --error: #a13d32;
+  --button-text: #fff;
+  --button-hover: #3c6553;
+  --soft-hover: #eaece6;
+  --underline: #b8b8b0;
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--background);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root[data-theme="dark"] {
+  --background: #191b19;
+  --text: #eeeee8;
+  --muted: #b0b4ac;
+  --hint: #a5aaa1;
+  --surface: #232623;
+  --border: #454b43;
+  --accent: #a5ceb3;
+  --error: #f0a198;
+  --button-text: #191b19;
+  --button-hover: #a5ceb3;
+  --soft-hover: #2d342d;
+  --underline: #6b7669;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 24px clamp(20px, 5vw, 80px) 48px;
+}
+
+.shortener {
+  width: min(100%, 720px);
+  margin: clamp(56px, 12vh, 144px) auto 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wordmark {
+  display: inline-block;
+  color: inherit;
+  font-size: 23px;
+  font-weight: 750;
+  letter-spacing: -1px;
+  text-decoration: none;
+}
+
+.wordmark span { color: var(--accent); }
+
+h1 {
+  margin: 0;
+  font-size: clamp(44px, 6vw, 80px);
+  line-height: 1.04;
+  font-weight: 650;
+  letter-spacing: -.045em;
+}
+
+.intro {
+  margin: 24px 0 48px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.intro a {
+  color: inherit;
+  text-decoration-color: var(--underline);
+  text-underline-offset: 3px;
+}
+
+.intro a:hover { color: var(--accent); }
+
+label, h2 {
+  display: block;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.input-row, .result-row { display: flex; gap: 10px; }
+
+input, button {
+  min-height: 56px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 16px;
+}
+
+input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 15px;
+}
+
+input::placeholder { color: var(--hint); opacity: 1; }
+input[aria-invalid="true"] { border-color: var(--error); }
+
+button {
+  flex-shrink: 0;
+  border: 1px solid var(--text);
+  padding: 0 19px;
+  background: var(--text);
+  color: var(--button-text);
+  font-weight: 550;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+button span { margin-left: 10px; }
+button:hover { background: var(--button-hover); border-color: var(--button-hover); }
+button:disabled { opacity: .65; cursor: wait; }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+
+.hint, .error, .status {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.hint { color: var(--hint); }
+.error { color: var(--error); }
+.status { min-height: 20px; color: var(--accent); }
+
+.result {
+  margin-top: 30px;
+  padding-top: 26px;
+  border-top: 1px solid var(--border);
+}
+
+.result h2 { color: var(--accent); }
+.result-row { align-items: center; }
+
+#short-url {
+  background: transparent;
+  border-color: transparent;
+  padding-left: 0;
+  color: var(--accent);
+  font-size: 17px;
+  font-weight: 550;
+}
+
+.copy-button {
+  min-height: 44px;
+  border-color: var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+.copy-button:hover { background: var(--soft-hover); border-color: var(--underline); }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted);
+}
+
+.theme-toggle:hover {
+  background: var(--soft-hover);
+  border-color: transparent;
+  color: var(--text);
+}
+[hidden] { display: none !important; }
+
+@media (max-width: 600px) {
+  body { padding-top: 16px; padding-bottom: 32px; }
+  .shortener { margin-top: 56px; }
+  h1 { font-size: clamp(40px, 10vw, 60px); }
+  .input-row { flex-direction: column; }
+  .input-row button { width: 100%; }
+  .intro { margin: 20px 0 36px; font-size: 16px; }
+  .result-row { flex-wrap: wrap; }
+  #short-url { flex: 1 1 200px; }
+  .copy-button { flex: 1 0 auto; }
+}
+
+@media (max-height: 500px) {
+  .shortener { margin-top: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button { transition: none; }
+}
